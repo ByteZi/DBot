@@ -3,13 +3,13 @@ const prefix = '!'
 const CLIENT_ID = process.env.C_ID
 const GUILD_ID = process.env.G_ID
 const D_TOKEN = process.env.D_TOKEN
+
 const axios = require('axios')
 const { GatewayIntentBits, Client, Routes } = require('discord.js')
 const { REST } = require("@discordjs/rest")
 const { SlashCommandBuilder } = require("@discordjs/builders")
 const { ChannelType } = require('discord.js')
 const { scheduleJob } = require("node-schedule")
-
 const rest = new REST({ version: "10" }).setToken(process.env.D_TOKEN)
 const schedule = require("./commands/schedule")
 
@@ -41,7 +41,7 @@ client.on("interactionCreate", async interaction => { //Detects interaction of S
       const channel = interaction.options.getChannel('channel')
 
       scheduleJob("* * * * * *", () => {
-        const api = "https://api.thecatapi.com/v1/images/search"
+        const api = url
         axios.get(api)
           .then(data => {
             channel.send(data.data[0].url)
