@@ -8,8 +8,6 @@ const axios = require('axios')
 const welcomeEmbed = require('./commands/welcome')
 const euthanizedEmbed = require("./commands/euthanized")
 
-console.log(process.env.CLIENT_ID)
-
 const client = new Client({
     intents: [
         GatewayIntentBits.GuildMessages,
@@ -24,7 +22,7 @@ client.on('ready', client => {
 })
 
 client.on('guildMemberAdd', member => {
-    const channelId = "979452328279154799"
+    const channelId = "1019189232448831528"
     client.channels.cache.get(channelId).send({ embeds: [welcomeEmbed(client,member)] })
 
 })
@@ -64,9 +62,9 @@ client.on('interactionCreate', (interaction) => {
 const main = async () => {
     try {
         console.log("started refreshing app (/) commands......")
-        await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), {
-            body: schedule
-        })
+        // await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_TOKEN, process.env.GUILD_TOKEN), {
+        //     body: schedule
+        // })
         client.login(process.env.BOT_TOKEN)
     } catch (err) {
         console.log(err)
